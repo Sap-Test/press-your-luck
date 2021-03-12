@@ -4,12 +4,14 @@
 let imgSrc= {"adversary":"tank.png", "defense":"raygun.png", "cows":"cow.png", "chickens":"chicken.png", "humans":"human.png"};
 
 let reRolls = 2;
-
-$("#rollCount").append(reRolls);
+$("#rollCount").text(reRolls);
 
 let score_X = 0;
+$("#human").text(score_X);
 let score_Y = 0;
+$("#cows").text(score_Y);
 let score_Z = 0;
+$("#chickens").text(score_Z);
 
 let diceArray = [];
 
@@ -284,7 +286,7 @@ function reroll()
 {
     // Decrements the number of rerolls.
     reRolls--;
-    $("#rollCount").append(reRolls);
+    $("#rollCount").text(reRolls);
     // Loops over the dice array and, if a die is not held, creates a new die object at that index.
     for(let i = 0; i < diceArray.length; i++)
     {
@@ -337,8 +339,8 @@ function scoreX()
 
     // Updates the points display and prints a confirmation message.
 
-    $("#human").append(countX);
-    $("h5#output").text(`You scored ${countX} humans.`);
+    $("#human").text(score_X);
+    $("h5#output").text(`You scored ${score_X} humans.`);
 
     // If all collection types have points scored, ends the game. Otherwise, starts the next turn.
 
@@ -369,8 +371,8 @@ function scoreY()
 
     // Updates the points display and prints a confirmation message.
 
-    $("#cows").append(countY);
-    $("h5#output").text(`You scored ${countY} cows.`);
+    $("#cows").text(score_Y);
+    $("h5#output").text(`You scored ${score_Y} cows.`);
 
     // If all collection types have points scored, ends the game. Otherwise, starts the next turn.
 
@@ -391,19 +393,17 @@ function scoreZ()
     for(let i = 0; i< diceArray.length; i++)
     {
         if(diceArray[i].face === "chickens" && diceArray[i].held === true)
-        countZ++;
+            countZ++;
     }
 
     // Assigns the points to the correct score variable.
     score_Z = countZ;
 
     // Updates the points display and prints a confirmation message.
-
-    $("#chickens").append(countZ);
-    $("h5#output").text(`You scored ${countZ} chickens.`);
+    $("#chickens").text(score_Z);
+    $("h5#output").text(`You scored ${score_Z} chickens.`);
 
     // If all collection types have points scored, ends the game. Otherwise, starts the next turn.
-
     if(score_X > 0 && score_Y > 0 && score_Z> 0)
     {
         endGame();

@@ -8,35 +8,25 @@
     background: beige no-repeat;
 }
 
-span.adversary
-{
-    border-radius: 10px;
-    background-image: url("tank.png");
-    outline: 3px solid black;
-    display: grid;
+.wrapper{
+    width: 75%;
+    display: block;
+    margin: auto;
 }
 
-span.defense
+button
 {
-    background-image: url("raygun.png");
-}
-
-span.cow
-{
-    background-image: url("cow.png");
-}
-
-span.chicken
-{
-    background-image: url("chicken.png");
-}
-
-span.human
-{
-    background-image: url("human.png");
+    color: white;
+    background-color: blue;
+    margin-left: 20px;
 }
 
 h5{
     display: inline-block;
-    padding-right: 200px;
+    padding-right: 250px;
+}
+
+label
+{
+    font-weight: bold;
 }

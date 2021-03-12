@@ -229,22 +229,18 @@ function lost ()
 
     {
         if(diceArray[i].face === "adversary"  && diceArray[i].held === true){
-            alert(diceArray[i].face);
-            alert(diceArray[i].held);
+
             adversaryCount++;
         }
 
         if(diceArray[i].face === "defense"  && diceArray[i].held === true){
-            alert(diceArray[i].face);
-            alert(diceArray[i].held);
-
             defenseCount++;
         }
 
     }
 
-    alert(adversaryCount);
-    alert(defenseCount);
+    alert("adversary count " + adversaryCount);
+    alert("defense count "+defenseCount);
 
     // Returns true if there are more adversaries than defense, false otherwise.
 
@@ -292,8 +288,8 @@ function reroll()
     // Loops over the dice array and, if a die is not held, creates a new die object at that index.
     for(let i = 0; i < diceArray.length; i++)
     {
-        alert(diceArray.length);
-        alert(diceArray[i].face + diceArray[i].held);
+        //alert(diceArray.length);
+        //alert(diceArray[i].face + " " + diceArray[i].held);
         if(diceArray[i].held === false)
         {
             createDieObject(i);

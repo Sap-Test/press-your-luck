@@ -1,0 +1,42 @@
+.hasSpan {
+    border-radius: 10px;
+    height: 75px;
+    width: 75px;
+    display: inline-block;
+    outline: 3px solid black;
+    margin: 20px;
+    background: beige no-repeat;
+}
+
+span.adversary
+{
+    border-radius: 10px;
+    background-image: url("tank.png");
+    outline: 3px solid black;
+    display: grid;
+}
+
+span.defense
+{
+    background-image: url("raygun.png");
+}
+
+span.cow
+{
+    background-image: url("cow.png");
+}
+
+span.chicken
+{
+    background-image: url("chicken.png");
+}
+
+span.human
+{
+    background-image: url("human.png");
+}
+
+h5{
+    display: inline-block;
+    padding-right: 200px;
+}

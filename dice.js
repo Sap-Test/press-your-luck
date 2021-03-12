@@ -288,7 +288,7 @@ function reroll()
     // Loops over the dice array and, if a die is not held, creates a new die object at that index.
     for(let i = 0; i < diceArray.length; i++)
     {
-        ////alert(diceArray.length);
+        //alert(diceArray.length);
         //alert(diceArray[i].face + " " + diceArray[i].held);
         if(diceArray[i].held === false)
         {

@@ -5,7 +5,6 @@ let imgSrc= {"adversary":"tank.png", "defense":"raygun.png", "cows":"cow.png", "
 
 let reRolls = 2;
 $("#rollCount").text(reRolls);
-
 let score_X = 0;
 $("#human").text(score_X);
 let score_Y = 0;
@@ -79,13 +78,7 @@ function createDieObject(index)
 
     let dieObject ={
         face: randomFace,
-        held: function(){
-            if(this.face === "adversary")
-                return this.held =true;
-            else
-                return this.held = false;
-        } ,
-
+        held: randomFace === "adversary" ? true : false,
         toggleHeld: function (){
             if(this.face !== "adversary") {
                 if (this.held === false)
@@ -93,13 +86,13 @@ function createDieObject(index)
                 else if (this.held === true)
                     return this.held = false;
             }
-            else
-                return this.held = true;
         }
     };
 
     //Inserts the object into the array at the given index.
     diceArray.splice(index, 1, dieObject);
+   //
+    // alert(diceArray[index].face + diceArray[index].held);
 
 }
 
@@ -107,6 +100,7 @@ function createDieObject(index)
 //	As a secondary sort, order by face.
 function sortDice(a, b)
 {
+
     if (a.held > b.held)
         return -1;
     else if (a.held < b.held)
@@ -131,6 +125,7 @@ function rollAllDice()
         createDieObject(i);
     }
 }
+
 let i = 0;
 //Locates the <span> that corresponds to the die object at the array index.
 function drawDie(index)
@@ -142,8 +137,9 @@ function drawDie(index)
     let imageUrl = imgSrc[diceArray[index].face];
     dice.css({"background-image": "url(" + imageUrl + ")", "background-repeat":"no-repeat"});
 
-    // Applies or removes a style to indicate whether the die is held or not.
-    if(diceArray[index].held() === true)
+
+      // Applies or removes a style to indicate whether the die is held or not.
+    if(diceArray[index].held === true)
     {
         dice.css("box-shadow", "10px 10px blue");
     }
@@ -158,6 +154,7 @@ function drawAllDice()
 
     diceArray.sort(sortDice);
 
+
     // Uses a loop to draw the die at each index of the dice array.
     for(let i = 0; i < diceArray.length; i++)
     {
@@ -171,34 +168,27 @@ function toggleHeld()
     // Locates the die object in the dice array that corresponds to the span that was clicked
     // and calls its function to toggle its held flag.
     let clickedSpan = $(this);
-
     let clickedIndex = clickedSpan.index();
-
-   /// alert(clickedIndex);
-    //alert(diceArray[clickedIndex].held());
 
     if(diceArray[clickedIndex].held === false)
     {
-
         diceArray[clickedIndex].toggleHeld();
-        //drawDie(diceArray[clickedIndex]);
     }
     else if(diceArray[clickedIndex].held === true)
     {
         diceArray[clickedIndex].toggleHeld();
-        //drawDie(diceArray[clickedIndex]);
     }
 
-    // Draws the die.
+   // alert(diceArray[clickedIndex].held + ""+ diceArray[clickedIndex].face);
 
+    // Draws the die.
     //drawDie(clickedIndex);
     if(diceArray[clickedIndex].held === true)
     {
-      clickedSpan.css("box-shadow", "10px 10px blue");
+        clickedSpan.css("box-shadow", "10px 10px blue");
     }
     else
-      clickedSpan.css("box-shadow", "");
-
+        clickedSpan.css("box-shadow", "");
 }
 
 //Called when the Start Turn button is clicked.
@@ -241,9 +231,6 @@ function lost ()
 
     }
 
-    alert("adversary count " + adversaryCount);
-    alert("defense count "+defenseCount);
-
     // Returns true if there are more adversaries than defense, false otherwise.
 
     if (adversaryCount > defenseCount)
@@ -284,29 +271,31 @@ function endTurn()
 //Called when the Reroll button is clicked.
 function reroll()
 {
+
     // Decrements the number of rerolls.
     reRolls--;
     $("#rollCount").text(reRolls);
     // Loops over the dice array and, if a die is not held, creates a new die object at that index.
     for(let i = 0; i < diceArray.length; i++)
     {
-        //alert(diceArray.length);
-        //alert(diceArray[i].face + " " + diceArray[i].held);
         if(diceArray[i].held === false)
         {
             createDieObject(i);
-
         }
 
     }
 
+
+
+    // Draws all the dice.
+    drawAllDice();
+
+
+    // If there are no rerolls left, ends the turn.
     if(reRolls === 0)
     {
         endTurn();
     }
-    // Draws all the dice.
-    drawAllDice();
-    // If there are no rerolls left, ends the turn.
 }
 
 function endGame()

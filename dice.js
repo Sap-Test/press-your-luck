@@ -4,7 +4,7 @@
 let imgSrc= {"adversary":"tank.png", "defense":"raygun.png", "cows":"cow.png", "chickens":"chicken.png", "humans":"human.png"};
 
 let reRolls = 2;
-$("#rollCount").text(reRolls);
+
 let score_X = 0;
 $("#human").text(score_X);
 let score_Y = 0;
@@ -91,8 +91,7 @@ function createDieObject(index)
 
     //Inserts the object into the array at the given index.
     diceArray.splice(index, 1, dieObject);
-   //
-    // alert(diceArray[index].face + diceArray[index].held);
+    //alert(diceArray[index].face + diceArray[index].held);
 
 }
 
@@ -130,6 +129,7 @@ let i = 0;
 //Locates the <span> that corresponds to the die object at the array index.
 function drawDie(index)
 {
+
     let dice = $("span#address"+i);
     i++;
    // Updates the background image of the span using CSS.
@@ -205,8 +205,12 @@ function startTurn()
 
 // Resets the numbers of rerolls.
     reRolls = 2;
+    $("#rollCount").text(reRolls);
+
+
 
 // Rolls all the dice and draws all the dice.
+    i=0;
     rollAllDice();
     drawAllDice();
 }
@@ -254,6 +258,7 @@ function endTurn()
     if(lostTurn === true)
     {
         $("#output").text("You Lost! The adversary is more than defense");
+
         //alert("you lost");
         $("button#start").show();
     }
@@ -275,6 +280,7 @@ function reroll()
     // Decrements the number of rerolls.
     reRolls--;
     $("#rollCount").text(reRolls);
+
     // Loops over the dice array and, if a die is not held, creates a new die object at that index.
     for(let i = 0; i < diceArray.length; i++)
     {
@@ -285,17 +291,17 @@ function reroll()
 
     }
 
-
-
     // Draws all the dice.
+    i = 0;
     drawAllDice();
-
 
     // If there are no rerolls left, ends the turn.
     if(reRolls === 0)
     {
         endTurn();
     }
+
+
 }
 
 function endGame()
@@ -319,7 +325,7 @@ function scoreX()
     let countX = 0;
     for(let i = 0; i< diceArray.length; i++)
     {
-        if(diceArray[i].face === "humans" && diceArray[i].held === true)
+        if(diceArray[i].face === "humans")
         countX++;
     }
 
@@ -351,7 +357,7 @@ function scoreY()
     let countY = 0;
     for(let i = 0; i< diceArray.length; i++)
     {
-        if(diceArray[i].face === "cows" && diceArray[i].held === true)
+        if(diceArray[i].face === "cows")
         countY++;
     }
 
@@ -381,7 +387,7 @@ function scoreZ()
     let countZ = 0;
     for(let i = 0; i< diceArray.length; i++)
     {
-        if(diceArray[i].face === "chickens" && diceArray[i].held === true)
+        if(diceArray[i].face === "chickens")
             countZ++;
     }
 
@@ -399,4 +405,5 @@ function scoreZ()
     }
     else
         startTurn();
+
 }
